@@ -3,20 +3,6 @@ import { defineComponent } from 'vue'
 import { mapState } from 'vuex'
 
 export default defineComponent({
-  data() {
-    return {
-      splash: true,
-    }
-  },
-
-  mounted() {
-    setTimeout(() => this.splash = false, 2000)
-  },
-
-  computed: {
-    ...mapState(["maxMainImg"])
-  },
-
   methods: {
     home() {
       this.$router.push("/")
@@ -26,22 +12,13 @@ export default defineComponent({
 </script>
 
 <template>
-  <div v-if="splash" class="splash">
-    <!-- <img src="./assets/splash-screen.png" /> -->
-  </div>
-
-  <template v-else>
-    <header class="container" :class="{ hero: maxMainImg }" @click="home">
-      <!-- <img class="logo" alt="ITS Hack Logo" src="./assets/splash-screen.png" /> -->
-      <h1>ITS Hack</h1>
+  <div class="container">
+    <header @click="home">
+      <h1>Störungshelfer</h1>
     </header>
 
-    <main>
-      <router-view />
-    </main>
-
-    <!-- <Footer /> -->
-  </template>
+    <router-view />
+  </div>
 </template>
 
 <style lang="scss">
@@ -49,13 +26,15 @@ html {
   font: 20px Avenir, Helvetica, Arial, sans-serif;
 }
 
-body {
+body, html, #app, .container {
   height: 100%;
-  overflow: auto;
+  width: 100%;
+  position: relative;
+}
 
-  main {
-    padding-bottom: 4em;
-  }
+.container {
+  display: flex;
+  flex-direction: column;
 }
 
 a {
@@ -91,17 +70,6 @@ a {
   padding: 10px;
   max-width: 1000px;
   margin: 0 auto;
-
-  .splash {
-    width: 1000px;
-    max-width: 100%;
-    margin: 0 auto;
-
-    img {
-      width: 100%;
-      padding: 3rem;
-    }
-  }
 
   header {
     display: flex;
