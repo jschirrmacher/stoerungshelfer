@@ -1,0 +1,455 @@
+{
+	"info": {
+		"_postman_id": "af567cc4-d1a7-4fef-941a-59229e37f96d",
+		"name": "Bike-Rental",
+		"description": "This service provides various functions to search for bikes and rent them. It's is an example for the DevConAPI training based on an [example from O&#39;Reilly](https://oreilly.com/learning/how-to-design-a-restful-api-architecture-from-a-human-language-spec).\n\nThe abstracted workflow allows to search for stations, go to one, rent an available bike, ride it, return it and check the rental history. Furthermore, existing rentals can be changed as well as cancelled.\n\nContact Support:\n Name: db.de/rapido",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "rents",
+			"item": [
+				{
+					"name": "{rent Id}",
+					"item": [
+						{
+							"name": "get Rent",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/rents/:rentId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"rents",
+										":rentId"
+									],
+									"variable": [
+										{
+											"key": "rentId",
+											"value": "-40169618",
+											"description": "(Required) The id of the rent to be retrieved."
+										}
+									]
+								},
+								"description": "Get an existing bike rental."
+							},
+							"response": [
+								{
+									"name": "Successful operation with result collection.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/rents/:rentId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"rents",
+												":rentId"
+											],
+											"variable": [
+												{
+													"key": "rentId"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"id\": 1,\n \"originStationId\": 1,\n \"destinationStationId\": 2,\n \"bikeNumber\": 10,\n \"startDate\": \"2019-06-08T19:30:39+00:00\",\n \"endDate\": \"2019-06-08T20:30:39+00:00\",\n \"isActive\": false\n}"
+								}
+							]
+						},
+						{
+							"name": "put Rent",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 1,\n    \"originStationId\": 1,\n    \"destinationStationId\": 2,\n    \"bikeNumber\": 10,\n    \"startDate\": \"2019-06-08T19:30:39+00:00\",\n    \"endDate\": \"2019-06-08T20:30:39+00:00\",\n    \"isActive\": false\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/rents/:rentId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"rents",
+										":rentId"
+									],
+									"variable": [
+										{
+											"key": "rentId",
+											"value": "-40169618",
+											"description": "(Required) The id of the rent to be changed."
+										}
+									]
+								},
+								"description": "Change an existing bike rental."
+							},
+							"response": [
+								{
+									"name": "Successful operation.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\": 1,\n    \"originStationId\": 1,\n    \"destinationStationId\": 2,\n    \"bikeNumber\": 10,\n    \"startDate\": \"2019-06-08T19:30:39+00:00\",\n    \"endDate\": \"2019-06-08T20:30:39+00:00\",\n    \"isActive\": false\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/rents/:rentId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"rents",
+												":rentId"
+											],
+											"variable": [
+												{
+													"key": "rentId"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "delete Rent",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/rents/:rentId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"rents",
+										":rentId"
+									],
+									"variable": [
+										{
+											"key": "rentId",
+											"value": "-40169618",
+											"description": "(Required) The id of the rent to be deleted."
+										}
+									]
+								},
+								"description": "Cancel an existing bike rental."
+							},
+							"response": [
+								{
+									"name": "Successful operation.",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/rents/:rentId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"rents",
+												":rentId"
+											],
+											"variable": [
+												{
+													"key": "rentId"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "post Rents",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"originStationId\": 1,\n    \"destinationStationId\": 2,\n    \"bikeNumber\": 10,\n    \"startDate\": \"2019-06-08T19:30:39+00:00\",\n    \"endDate\": \"2019-06-08T20:30:39+00:00\",\n    \"isActive\": false\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/rents",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rents"
+							]
+						},
+						"description": "Add a new bike rental."
+					},
+					"response": [
+						{
+							"name": "Successful operation.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 1,\n    \"originStationId\": 1,\n    \"destinationStationId\": 2,\n    \"bikeNumber\": 10,\n    \"startDate\": \"2019-06-08T19:30:39+00:00\",\n    \"endDate\": \"2019-06-08T20:30:39+00:00\",\n    \"isActive\": false\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/rents",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"rents"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Location",
+									"value": "reprehenderit do ul",
+									"description": "Path of created rental, like /rents/2."
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "get Rents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/rents",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"rents"
+							]
+						},
+						"description": "History of all bike rentals."
+					},
+					"response": [
+						{
+							"name": "Successful operation with result collection.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/rents",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"rents"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n {\n  \"id\": 1,\n  \"originStationId\": 1,\n  \"destinationStationId\": 2,\n  \"bikeNumber\": 10,\n  \"startDate\": \"2019-06-08T19:30:39+00:00\",\n  \"endDate\": \"2019-06-08T20:30:39+00:00\",\n  \"isActive\": false\n },\n {\n  \"id\": 1,\n  \"originStationId\": 1,\n  \"destinationStationId\": 2,\n  \"bikeNumber\": 10,\n  \"startDate\": \"2019-06-08T19:30:39+00:00\",\n  \"endDate\": \"2019-06-08T20:30:39+00:00\",\n  \"isActive\": false\n }\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "get Stations",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Check station name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData[0].name).to.eql(\"Matrix\");",
+							"});",
+							"",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/stations?minimumAvailableBikes=1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"stations"
+					],
+					"query": [
+						{
+							"key": "minimumAvailableBikes",
+							"value": "1",
+							"description": "Filter by a minimum amount of available bikes on each station to show only stations fulfilling this."
+						}
+					]
+				},
+				"description": "Retrieve a collection of bike rental stations."
+			},
+			"response": [
+				{
+					"name": "Successful operation with result collection.",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "DB-Api-Key",
+								"value": "OoZH8gpaUssoWrmGUBqZ8p9YEUscd38d",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/stations?minimumAvailableBikes=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"stations"
+							],
+							"query": [
+								{
+									"key": "minimumAvailableBikes",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "[\n {\n  \"id\": 2,\n  \"name\": \"Brooklyn Bridge\",\n  \"location\": [\n   40.7,\n   -73\n  ],\n  \"availableBikesQuantity\": 2\n },\n {\n  \"id\": 2,\n  \"name\": \"Brooklyn Bridge\",\n  \"location\": [\n   40.7,\n   -73\n  ],\n  \"availableBikesQuantity\": 2\n }\n]"
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "{{apiKey}}",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "DB-Api-Key",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://gateway.hub.db.de/dob"
+		},
+		{
+			"key": "apiKey",
+			"value": ""
+		}
+	]
+}

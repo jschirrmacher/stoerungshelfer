@@ -1,0 +1,31 @@
+---
+version: '3.0'
+services:
+  service:
+    image: openjdk:17-jdk
+    volumes:
+      - ./backend/service/:/app/
+    entrypoint:
+      - cd /app
+      - mvn clean install spring-boot:run
+
+#  postgres-geoobjects:
+#    environment:
+#      - POSTGRES_PASSWORD=pwd
+#    image: default-docker-3rdparty.bahnhub.tech.rz.db.de/bitnami/postgresql:11.11.0@sha256:7805677795d2872d805a190602b0ead7bc911181a40cb87c32d7f2d58bbae84e  # yamllint disable-line rule:line-length
+#    volumes:
+#      - ./geoobjects-database/init.sql:/docker-entrypoint-initdb.d/init.sql
+#      - postgres_data_geoobjects:/var/lib/postgresql/data
+#    ports:
+#      - 5492:5432
+
+#  frontend:
+
+#  nats-server:
+#    image: default-docker-3rdparty.bahnhub.tech.rz.db.de/nats:latest
+#    ports:
+#      - 4222:4222
+
+#volumes:
+#  postgres_data_geoobjects:
+#    driver: local

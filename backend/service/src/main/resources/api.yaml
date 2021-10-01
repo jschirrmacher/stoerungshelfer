@@ -1,0 +1,196 @@
+---
+openapi: 3.0.3
+servers:
+  - url: "https://gateway.hub.db.de/bike-rental-example-full/v1"
+    description: Deployte Umgebung
+  - url: "http://localhost:8080/v1"
+    description: Lokal
+info:
+  description: |-
+    This service provides various functions to search for bikes and rent them. It's is an example for the DevConAPI training based on an [example from O&#39;Reilly](https://oreilly.com/learning/how-to-design-a-restful-api-architecture-from-a-human-language-spec).
+
+    The abstracted workflow allows to search for stations, go to one, rent an available bike, ride it, return it and check the rental history. Furthermore, existing rentals can be changed as well as cancelled.
+  version: 1.0.0
+  title: Bike-Rental
+  contact:
+    name: db.de/rapido
+tags:
+  - name: Stations
+  - name: Rents
+paths:
+  /stations:
+    get:
+      tags:
+        - Stations
+      description: Retrieve a collection of bike rental stations.
+      operationId: getStations
+      parameters:
+        - name: minimumAvailableBikes
+          in: query
+          schema:
+            type: integer
+          required: false
+          description: Filter by a minimum amount of available bikes on each station to show only stations fulfilling this.
+      responses:
+        "200":
+          description: Successful operation with result collection.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Station"
+  /rents:
+    post:
+      tags:
+        - Rents
+      description: Add a new bike rental.
+      operationId: postRents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Rent"
+      responses:
+        "201":
+          description: Successful operation.
+          headers:
+            Location:
+              schema:
+                type: string
+              description: "Path of created rental, like /rents/2."
+    get:
+      tags:
+        - Rents
+      description: History of all bike rentals.
+      operationId: getRents
+      responses:
+        "200":
+          description: Successful operation with result collection.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Rent"
+  "/rents/{rentId}":
+    get:
+      tags:
+        - Rents
+      description: Get an existing bike rental.
+      operationId: getRent
+      parameters:
+        - name: rentId
+          in: path
+          schema:
+            type: integer
+          required: true
+          description: The id of the rent to be retrieved.
+      responses:
+        "200":
+          description: Successful operation with result collection.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Rent"
+    put:
+      tags:
+        - Rents
+      description: Change an existing bike rental.
+      operationId: putRent
+      parameters:
+        - name: rentId
+          in: path
+          schema:
+            type: integer
+          required: true
+          description: The id of the rent to be changed.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Rent"
+      responses:
+        "200":
+          description: Successful operation.
+    delete:
+      tags:
+        - Rents
+      description: Cancel an existing bike rental.
+      operationId: deleteRent
+      parameters:
+        - name: rentId
+          in: path
+          schema:
+            type: integer
+          required: true
+          description: The id of the rent to be deleted.
+      responses:
+        "200":
+          description: Successful operation.
+components:
+  schemas:
+    Rent:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique id
+          example: 1
+        originStationId:
+          type: integer
+          description: The station id to start the rental.
+          example: 1
+        destinationStationId:
+          type: integer
+          description: The station id to end the rental.
+          example: 2
+        bikeNumber:
+          type: integer
+          description: The bike id for the rental (as written on the bike itself).
+          example: 10
+        startDate:
+          type: string
+          format: date-time
+          description: Starting timestamp of the rental.
+          example: "2019-06-08T19:30:39+00:00"
+        endDate:
+          type: string
+          format: date-time
+          description: "Ending Timestamp of the rental, might be null when the rental is still active."
+          example: "2019-06-08T20:30:39+00:00"
+          nullable: true
+        isActive:
+          type: boolean
+          description: Flag whether the rental is currently active.
+          example: false
+    Station:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique id
+          example: 2
+        name:
+          type: string
+          description: Name and elaborated description of the station.
+          example: Brooklyn Bridge
+        location:
+          type: array
+          minItems: 2
+          maxItems: 2
+          items:
+            type: number
+            format: double
+          description: Exact geolocation (latitude and longitude) of the station.
+          example:
+            - 40.7
+            - -73
+        availableBikesQuantity:
+          type: integer
+          description: Amount of currently available bikes at the station.
+          example: 2
+      required:
+        - id
+        - name
+        - location
