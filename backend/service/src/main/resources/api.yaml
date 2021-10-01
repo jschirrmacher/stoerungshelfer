@@ -11,7 +11,7 @@ info:
 paths:
   /disruptions:
     get:
-      description: Gets the list of current disruptions
+      description: Gets the list of current disruptions. Settled disruptions can be optionally included.
       operationId: getDisruptions
       parameters:
         - name: areaFrom
@@ -26,6 +26,14 @@ paths:
           schema:
             $ref: "#/components/schemas/Coordinate"
             example: [53.65, 10.12]
+        - name: include
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              enum:
+                - settled
       responses:
         "200":
           description: Returns the current disruptions in the given area
@@ -47,14 +55,42 @@ paths:
             schema:
               $ref: "#/components/schemas/NewDisruption"
       responses:
-        "200":
-          description: Disruption was successfully accepted
+        "201":
+          description: Disruption was successfully created
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/Disruption"
+
+  "/disruptions/:id":
+    delete:
+      description: Marks a disruption as settled. It will not be included in GET /disruptions any more
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+      responses:
+        "200":
+          description: Disruption was successfully settled
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Disruption"
+        "404":
+          description: Disruption id was not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
 
 components:
   schemas:
@@ -65,14 +101,26 @@ components:
         format: double
       minItems: 2
       maxItems: 2
+      example: [53.5518584, 9.9916219]
 
     NewDisruption:
       type: object
       properties:
-        location:
+        geojson:
+          $ref: "https://gist.githubusercontent.com/codan-telcikt/e1d59ccc9a3af83e083f1a514c84026c/raw/b0c7fb9e3d6b074f55ec2758f98fbb8a770149d1/geometry_geojson.yaml"
+        locationFrom:
+          $ref: "#/components/schemas/Coordinate"
+        locationTo:
           $ref: "#/components/schemas/Coordinate"
         description:
           type: string
+        trafficTypesAffected:
+          type: array
+          items:
+            enum:
+              - rail
+              - street
+          example: ["rail", "street"]
 
     Disruption:
       type: object
@@ -82,13 +130,14 @@ components:
               type: string
               format: uuid
               description: Unique Id of disruption
+              example: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
         - $ref: "#/components/schemas/NewDisruption"
 
       example:
         [
           {
             "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-            "location": [53.5518584,9.9916219],
+            "location": [53.5518584, 9.9916219],
             "description": "Sperrung Reesendamm",
           },
         ]
