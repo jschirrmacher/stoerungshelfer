@@ -19,11 +19,13 @@ paths:
           in: query
           schema:
             $ref: "#/components/schemas/Coordinate"
+            example: [53.45, 9.93]
         - name: areaTo
           required: true
           in: query
           schema:
             $ref: "#/components/schemas/Coordinate"
+            example: [53.65, 10.12]
       responses:
         "200":
           description: Returns the current disruptions in the given area
@@ -33,7 +35,7 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Disruption"
-                  
+
     post:
       description: Posts a new mobility disruption
       operationId: newDisruption
@@ -57,20 +59,20 @@ paths:
 components:
   schemas:
     Coordinate:
-      type: object
-      properties:
-        lat:
-          type: number
-        lng:
-          type: number
-        description:
-          type: string
+      type: array
+      items:
+        type: number
+        format: double
+      minItems: 2
+      maxItems: 2
 
     NewDisruption:
       type: object
       properties:
         location:
           $ref: "#/components/schemas/Coordinate"
+        description:
+          type: string
 
     Disruption:
       type: object
@@ -81,3 +83,12 @@ components:
               format: uuid
               description: Unique Id of disruption
         - $ref: "#/components/schemas/NewDisruption"
+
+      example:
+        [
+          {
+            "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "location": [53.5518584,9.9916219],
+            "description": "Sperrung Reesendamm",
+          },
+        ]
