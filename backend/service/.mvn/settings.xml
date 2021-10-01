@@ -1,54 +1,6 @@
 <?xml version="1.0"?>
 <settings xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                       http://maven.apache.org/xsd/settings-1.0.0.xsd">
   <servers>
-    <server>
-      <id>nvsvsp-releases</id>
-      <username>${m2.user}</username>
-      <password>${m2.password}</password>
-      <configuration>
-        <httpConfiguration>
-          <all>
-            <usePreemptive>true</usePreemptive>
-          </all>
-        </httpConfiguration>
-      </configuration>
-    </server>
-    <server>
-      <id>nvsvsp-snapshots</id>
-      <username>${m2.user}</username>
-      <password>${m2.password}</password>
-      <configuration>
-        <httpConfiguration>
-          <all>
-            <usePreemptive>true</usePreemptive>
-          </all>
-        </httpConfiguration>
-      </configuration>
-    </server>
-    <server>
-      <id>nvs-maven-3rdparty</id>
-      <username>${m2.user}</username>
-      <password>${m2.password}</password>
-      <configuration>
-        <httpConfiguration>
-          <all>
-            <usePreemptive>true</usePreemptive>
-          </all>
-        </httpConfiguration>
-      </configuration>
-    </server>
-    <server>
-      <id>nvs-maven-plugin-3rdparty</id>
-      <username>${m2.user}</username>
-      <password>${m2.password}</password>
-      <configuration>
-        <httpConfiguration>
-          <all>
-            <usePreemptive>true</usePreemptive>
-          </all>
-        </httpConfiguration>
-      </configuration>
-    </server>
   </servers>
   <profiles>
     <profile>
@@ -67,36 +19,6 @@
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
-      <repositories>
-        <repository>
-          <id>central</id>
-          <name>Nexus default repository.</name>
-          <url>https://bahnhub.tech.rz.db.de/artifactory/default-maven-3rdparty/</url>
-          <snapshots>
-            <enabled>false</enabled>
-          </snapshots>
-          <releases>
-            <updatePolicy>never</updatePolicy>
-          </releases>
-        </repository>
-      </repositories>
-      <pluginRepositories>
-        <pluginRepository>
-          <id>central</id>
-          <name>Nexus default repository.</name>
-          <url>https://bahnhub.tech.rz.db.de/artifactory/default-maven-3rdparty/</url>
-          <snapshots>
-            <enabled>false</enabled>
-          </snapshots>
-          <releases>
-            <updatePolicy>never</updatePolicy>
-          </releases>
-        </pluginRepository>
-      </pluginRepositories>
     </profile>
   </profiles>
-  <activeProfiles>
-    <activeProfile>jenkins</activeProfile>
-    <activeProfile>appproxy</activeProfile>
-  </activeProfiles>
 </settings>
