@@ -3,9 +3,11 @@ package de.itshack.service.controller;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
+import de.itshack.service.entity.DisruptionEntity;
 import de.itshack.service.model.Disruption;
 import de.itshack.service.model.NewDisruption;
 import de.itshack.service.service.DisruptionsService;
@@ -27,16 +29,18 @@ public class DisruptionsController implements DisruptionsApi {
     private DisruptionsService disruptionsService;
 
     @Override
-    public ResponseEntity<List<Disruption>> getDisruptions(List<Double> areaFrom, List<Double> areaTo) {
-        return ResponseEntity.ok(disruptionsService.getDisruptions(areaFrom, areaTo));
+    public ResponseEntity<Disruption> disruptionsIdDelete(UUID id) {
+        return DisruptionsApi.super.disruptionsIdDelete(id);
     }
 
     @Override
-    public ResponseEntity<List<Disruption>> newDisruption(NewDisruption newDisruption) {
-        try {
-            return ResponseEntity.created(disruptionsService.createDisruption(newDisruption));
-        } catch (URISyntaxException ex) {
-            return ResponseEntity.status(500);
-        }
+    public ResponseEntity<List<Disruption>> getDisruptions(List<Double> areaFrom, List<Double> areaTo, List<String> include) {
+        List<Disruption> disruptions = disruptionsService.getDisruptions(areaFrom, areaTo, include).stream().map(DisruptionEntity::toModel).toList();
+        return ResponseEntity.ok(disruptions);
+    }
+
+    @Override
+    public ResponseEntity<Disruption> newDisruption(NewDisruption newDisruption) {
+        return ResponseEntity.ok(disruptionsService.createDisruption(newDisruption).toModel());
     }
 }
