@@ -26,7 +26,7 @@ services:
       - 8080:8080
 
   nats-server:
-    image: default-docker-3rdparty.bahnhub.tech.rz.db.de/nats:latest
+    image: nats:latest
     ports:
       - 4222:4222
 
