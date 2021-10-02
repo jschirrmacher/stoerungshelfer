@@ -104,8 +104,6 @@ components:
     NewDisruption:
       type: object
       properties:
-        geojson:
-          $ref: "https://gist.githubusercontent.com/codan-telcikt/e1d59ccc9a3af83e083f1a514c84026c/raw/b0c7fb9e3d6b074f55ec2758f98fbb8a770149d1/geometry_geojson.yaml"
         locationFrom:
           $ref: "#/components/schemas/Coordinate"
         locationTo:
