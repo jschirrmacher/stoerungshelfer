@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, ref } from "vue"
+import { defineComponent, Ref, ref } from "vue"
 import { useStore } from "vuex"
 import { Alternative } from "../types"
 import Disruption from "./Disruption.vue"
@@ -13,7 +13,7 @@ export default defineComponent({
     const projection = ref('EPSG:4326')
     const zoom = ref(15)
     const rotation = ref(0)
-    const activeAlternative = ref(null)
+    const activeAlternative = ref(null) as Ref<Alternative | null>
 
     return {
       store,

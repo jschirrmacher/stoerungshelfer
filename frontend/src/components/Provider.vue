@@ -5,7 +5,10 @@ import marker from "../assets/images/marker.png"
 
 export default defineComponent({
   props: {
-    alternative: Object as PropType<Alternative>
+    alternative: {
+      type: Object as PropType<Alternative>,
+      required: true
+    }
   },
 
   setup() {
