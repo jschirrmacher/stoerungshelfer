@@ -49,9 +49,9 @@ export default defineComponent({
   computed: {
     alternatives() {
       return [
-        { description: "Fahrrad", location: [9.99, 53.55], provider: "callABike" },
-        { description: "eTretroller", location: [9.95, 53.554], provider: "lime" },
-        { description: "Taxi", location: [10, 53.55], provider: "taxi" },
+        { id: "1", description: "Mit dem Call-a-Bike Fahrrad ab Ballindamm", location: [9.99, 53.55], provider: "callABike" },
+        { id: "2", description: "Mit einem Lime eTretroller ab Jungfernsteg", location: [9.95, 53.554], provider: "lime" },
+        { id: "3", description: "Mit dem Taxi ab Gänsemarkt", location: [10, 53.55], provider: "taxi" },
       ]
     }
   },

@@ -14,12 +14,18 @@ type Alternative = {
 export default defineComponent({
   setup() {
     return {
-      providerIcons: { lime, callABike, taxi }
+      providerIcons: { lime, callABike, taxi } as Record<string, string>,
     }
   },
 
   props: {
     alternatives: Array as PropType<Alternative[]>
+  },
+
+  methods: {
+    getIcon(alternative: Alternative) {
+      return this.providerIcons[alternative.provider]
+    }
   }
 })
 </script>
@@ -27,7 +33,7 @@ export default defineComponent({
 <template>
   <ul class="alternatives">
     <li v-for="alternative in alternatives" :key="alternative.id">
-      <div><img :src="providerIcons[alternative.provider]">{{ alternative.description }}</div>
+      <div><img :src="getIcon(alternative)">{{ alternative.description }}</div>
     </li>
   </ul>
 </template>
