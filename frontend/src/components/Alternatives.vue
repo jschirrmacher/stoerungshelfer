@@ -3,13 +3,7 @@ import { defineComponent, PropType } from 'vue'
 import lime from "../assets/images/providers/lime.png"
 import callABike from "../assets/images/providers/call-a-bike.png"
 import taxi from "../assets/images/providers/taxi.png"
-
-type Alternative = {
-  id: string
-  description: string
-  location: number[]
-  provider: string
-}
+import { Alternative } from "../types"
 
 export default defineComponent({
   setup() {
@@ -32,7 +26,7 @@ export default defineComponent({
 
 <template>
   <ul class="alternatives">
-    <li v-for="alternative in alternatives" :key="alternative.id">
+    <li v-for="alternative in alternatives" :key="alternative.id" @click="$emit('selected', alternative)">
       <div><img :src="getIcon(alternative)">{{ alternative.description }}</div>
     </li>
   </ul>

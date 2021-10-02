@@ -1,8 +1,10 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue"
 import { useStore } from "vuex"
+import { Alternative } from "../types"
 import Disruption from "./Disruption.vue"
 import Alternatives from "./Alternatives.vue"
+import Provider from "./Provider.vue"
 
 export default defineComponent({
   setup() {
@@ -11,6 +13,7 @@ export default defineComponent({
     const projection = ref('EPSG:4326')
     const zoom = ref(15)
     const rotation = ref(0)
+    const activeAlternative = ref(null)
 
     return {
       store,
@@ -18,6 +21,7 @@ export default defineComponent({
       projection,
       zoom,
       rotation,
+      activeAlternative,
       layers: [
         "geofox_workspace:dynamic_stations",
         "geofox_workspace:geofoxdb_stations",
@@ -44,17 +48,23 @@ export default defineComponent({
     }
   },
 
-  components: { Disruption, Alternatives },
+  components: { Disruption, Alternatives, Provider },
 
   computed: {
     alternatives() {
       return [
-        { id: "1", description: "Mit dem StadtRAD ab Ballindamm", location: [9.99, 53.55], provider: "callABike" },
-        { id: "2", description: "Mit einem Lime eTretroller ab Jungfernsteg", location: [9.95, 53.554], provider: "lime" },
-        { id: "3", description: "Mit dem Taxi ab Gänsemarkt", location: [10, 53.55], provider: "taxi" },
+        { id: "1", description: "Mit dem StadtRAD ab Ballindamm", location: [9.995239, 53.552372], provider: "callABike" },
+        { id: "2", description: "Mit einem Lime eTretroller ab Jungfernsteg", location: [9.992468, 53.553239], provider: "lime" },
+        { id: "3", description: "Mit dem Taxi ab Gänsemarkt", location: [9.988247, 53.555491], provider: "taxi" },
       ]
     }
   },
+
+  methods: {
+    selectAlternative(alternative: Alternative) {
+      this.activeAlternative = alternative
+    }
+  }
 })
 </script>
 
@@ -72,13 +82,12 @@ export default defineComponent({
 
       <ol-vector-layer :zIndex="1002">
         <Disruption :coordinate="[9.9940519, 53.5522684]" />
-
-
+        <Provider v-if="activeAlternative" :alternative="activeAlternative" />
       </ol-vector-layer>
     </ol-map>
 
     <h4>Alternativen</h4>
-    <Alternatives :alternatives="alternatives" />
+    <Alternatives :alternatives="alternatives" @selected="selectAlternative" />
   </div>
 </template>
 
