@@ -18,6 +18,10 @@ export default defineComponent({
     </header>
 
     <router-view />
+
+    <footer>
+      Karte, Strecken und Halte von https://geofox.de/
+    </footer>
   </div>
 </template>
 
@@ -101,6 +105,10 @@ a {
         display: none;
       }
     }
+  }
+
+  footer {
+    font-size: 10px;
   }
 }
 </style>

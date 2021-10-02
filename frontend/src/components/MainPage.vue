@@ -1,6 +1,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { useStore } from 'vuex'
+import Disruption from './Disruption.vue'
 
 export default defineComponent({
   setup() {
@@ -9,13 +10,11 @@ export default defineComponent({
     const projection = ref('EPSG:4326')
     const zoom = ref(15)
     const rotation = ref(0)
-    let radius = 10
-    setInterval(() => {
-      radius = ((radius + 1) % 10) + 10
-    }, 50)
+    const radius = ref(10)
 
     return {
       store,
+      radius,
       center,
       projection,
       zoom,
@@ -43,9 +42,10 @@ export default defineComponent({
         "geofox_workspace:geofoxdb_zahlgrenzen_sonderfahrplan",
         "geofox_workspace:geofoxdb_zahlgrenzen_we_nacht"
       ],
-      radius: ref(radius)
     }
   },
+
+  components: { Disruption },
 })
 </script>
 
@@ -53,25 +53,15 @@ export default defineComponent({
   <ol-map :loadTilesWhileAnimating="true" :loadTilesWhileInteracting="true" style="height:100%" :pixelRatio="2">
     <ol-view ref="view" :center="center" :rotation="rotation" :zoom="zoom" :projection="projection" />
     <ol-tile-layer>
-      <ol-source-osm />
+      <ol-source-osm url="https://map.geofox.de/tiles/{z}/{x}/{y}.png" />
     </ol-tile-layer>
 
     <ol-image-layer :zIndex="1001">
       <ol-source-image-wms url="https://map.geofox.de/geoserver/geofox_workspace/wms" serverType="geoserver" :layers="layers" format="image/svg+xml" attributions="geofox.de" :ratio="1" />
     </ol-image-layer>
 
-    <ol-vector-layer>
-      <ol-source-vector>
-        <ol-feature>
-          <ol-geom-point :coordinates="[9.9940519, 53.5522684]"></ol-geom-point>
-          <ol-style>
-            <ol-style-circle :radius="radius">
-              <ol-style-fill color="red"></ol-style-fill>
-              <ol-style-stroke color="black" :width="3" ></ol-style-stroke>
-            </ol-style-circle>
-          </ol-style>
-        </ol-feature>
-      </ol-source-vector>
+    <ol-vector-layer :zIndex="1002">
+      <Disruption :coordinate="[9.9940519, 53.5522684]" />
     </ol-vector-layer>
   </ol-map>
 </template>
