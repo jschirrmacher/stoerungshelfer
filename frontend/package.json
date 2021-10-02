@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build && cp ../backend/service/src/main/resources/api.yaml dist",
+    "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview",
     "test": ""
   },
