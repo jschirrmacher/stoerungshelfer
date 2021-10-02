@@ -20,7 +20,10 @@ services:
     ports:
       - 5432:5432
 
-#  frontend:
+  frontend:
+    build: ./frontend
+    ports:
+      - 5000:5000
 
 #  nats-server:
 #    image: default-docker-3rdparty.bahnhub.tech.rz.db.de/nats:latest
