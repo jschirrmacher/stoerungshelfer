@@ -10,11 +10,9 @@ export default defineComponent({
     const projection = ref('EPSG:4326')
     const zoom = ref(15)
     const rotation = ref(0)
-    const radius = ref(10)
 
     return {
       store,
-      radius,
       center,
       projection,
       zoom,
