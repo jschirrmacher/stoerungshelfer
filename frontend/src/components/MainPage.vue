@@ -1,7 +1,8 @@
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { useStore } from 'vuex'
-import Disruption from './Disruption.vue'
+import { defineComponent, ref } from "vue"
+import { useStore } from "vuex"
+import Disruption from "./Disruption.vue"
+import Alternatives from "./Alternatives.vue"
 
 export default defineComponent({
   setup() {
@@ -43,29 +44,45 @@ export default defineComponent({
     }
   },
 
-  components: { Disruption },
+  components: { Disruption, Alternatives },
+
+  computed: {
+    alternatives() {
+      return [
+        { description: "Fahrrad", location: [9.99, 53.55], provider: "callABike" },
+        { description: "eTretroller", location: [9.95, 53.554], provider: "lime" },
+        { description: "Taxi", location: [10, 53.55], provider: "taxi" },
+      ]
+    }
+  },
 })
 </script>
 
 <template>
-  <ol-map :loadTilesWhileAnimating="true" :loadTilesWhileInteracting="true" style="height:100%" :pixelRatio="2">
-    <ol-view ref="view" :center="center" :rotation="rotation" :zoom="zoom" :projection="projection" />
-    <ol-tile-layer>
-      <ol-source-osm url="https://map.geofox.de/tiles/{z}/{x}/{y}.png" />
-    </ol-tile-layer>
+  <div class="wrapper">
+    <ol-map :loadTilesWhileAnimating="true" :loadTilesWhileInteracting="true" style="height:100%" :pixelRatio="2">
+      <ol-view ref="view" :center="center" :rotation="rotation" :zoom="zoom" :projection="projection" />
+      <ol-tile-layer>
+        <ol-source-osm url="https://map.geofox.de/tiles/{z}/{x}/{y}.png" />
+      </ol-tile-layer>
 
-    <ol-image-layer :zIndex="1001">
-      <ol-source-image-wms url="https://map.geofox.de/geoserver/geofox_workspace/wms" serverType="geoserver" :layers="layers" format="image/svg+xml" attributions="geofox.de" :ratio="1" />
-    </ol-image-layer>
+      <ol-image-layer :zIndex="1001">
+        <ol-source-image-wms url="https://map.geofox.de/geoserver/geofox_workspace/wms" serverType="geoserver" :layers="layers" format="image/svg+xml" attributions="geofox.de" :ratio="1" />
+      </ol-image-layer>
 
-    <ol-vector-layer :zIndex="1002">
-      <Disruption :coordinate="[9.9940519, 53.5522684]" />
-    </ol-vector-layer>
-  </ol-map>
+      <ol-vector-layer :zIndex="1002">
+        <Disruption :coordinate="[9.9940519, 53.5522684]" />
+      </ol-vector-layer>
+    </ol-map>
+
+    <Alternatives :alternatives="alternatives" />
+  </div>
 </template>
 
 <style lang="scss" scoped>
-h2 {
-  text-align: center;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%
 }
 </style>
