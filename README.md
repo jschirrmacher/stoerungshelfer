@@ -1,6 +1,6 @@
 # Störungshelfer
 
-## Unser Versprechen
+## Das Versprechen
 
 Der Störungshelfer hilft dir als Mobilitätsnutzer, sicher ans Ziel zu kommen, auch wenn Störungen auftreten.
 
@@ -16,15 +16,11 @@ Auch andere Mobilitätsanbieter haben einen Vorteil: sie erfahren sofort, wo ein
 
 Mit der Zeit lernt der Störungshelfer, wie die Nutzer in bestimmten Situationen reagieren und kann so präventiv geeignete Anbieter informieren, sobald eine Störung bekannt wird.
 
-## System-Komponenten
+## API
 
-### API
-
-Dreh- und Angelpunkt ist das API.
+Dreh- und Angelpunkt ist das [API](https://jschirrmacher.github.io/stoerungshelfer/api-ui.html).
 Mobilitätsanbieter liefern darüber Informationen über die auftretenden Störungen und informieren so ihre Nutzer zeitnah über Push-Nachrichten.
 
-### Smartphone- und Web-App
+## Smartphone- und Web-App
 
-Die Mobilitätsnutzer:innen verwenden die App, über die sie ihre individuelle Route planen und in der sie über Störungen und Alternativangebote informiert werden.
-
-### Routenplaner
+Die Mobilitätsnutzer:innen verwenden die [App](https://jschirrmacher.github.io/stoerungshelfer), über die sie ihre individuelle Route planen und in der sie über Störungen und Alternativangebote informiert werden.
