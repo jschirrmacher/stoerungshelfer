@@ -75,6 +75,7 @@ export default defineComponent({
       </ol-vector-layer>
     </ol-map>
 
+    <h4>Alternativen</h4>
     <Alternatives :alternatives="alternatives" />
   </div>
 </template>
@@ -84,5 +85,10 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   height: 100%
+}
+
+h4 {
+  font-size: 18px;
+  font-weight: bold;
 }
 </style>

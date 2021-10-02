@@ -1,6 +1,5 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { mapState } from 'vuex'
 
 export default defineComponent({
   methods: {
@@ -71,7 +70,6 @@ a {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  padding: 10px;
   max-width: 1000px;
   margin: 0 auto;
 
