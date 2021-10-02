@@ -13,7 +13,8 @@ export default defineComponent({
   },
 
   props: {
-    alternatives: Array as PropType<Alternative[]>
+    alternatives: Array as PropType<Alternative[]>,
+    activeId: String,
   },
 
   methods: {
@@ -26,7 +27,7 @@ export default defineComponent({
 
 <template>
   <ul class="alternatives">
-    <li v-for="alternative in alternatives" :key="alternative.id" @click="$emit('selected', alternative)">
+    <li v-for="alternative in alternatives" :key="alternative.id" :class="{active: alternative.id === activeId}" @click="$emit('selected', alternative)">
       <div><img :src="getIcon(alternative)">{{ alternative.description }}</div>
     </li>
   </ul>
@@ -41,7 +42,7 @@ export default defineComponent({
     width: 100%;
     font-size: .8rem;
 
-    &:hover {
+    &:hover, &.active {
       background-color: #f0f0f0;
     }
 

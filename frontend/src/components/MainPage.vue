@@ -87,7 +87,7 @@ export default defineComponent({
     </ol-map>
 
     <h4>Alternativen</h4>
-    <Alternatives :alternatives="alternatives" @selected="selectAlternative" />
+    <Alternatives :alternatives="alternatives" :active="activeAlternative" @selected="selectAlternative" />
   </div>
 </template>
 
