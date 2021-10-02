@@ -8,7 +8,7 @@ services:
       - JDBC_DATABASE_USERNAME=postgres
       - JDBC_DATABASE_PASSWORD=pwd
     ports:
-      - 8080:8080
+      - 8090:8080
 
   postgres-disruptions:
     environment:
@@ -23,12 +23,12 @@ services:
   frontend:
     build: ./frontend
     ports:
-      - 5000:5000
+      - 8080:8080
 
-#  nats-server:
-#    image: default-docker-3rdparty.bahnhub.tech.rz.db.de/nats:latest
-#    ports:
-#      - 4222:4222
+  nats-server:
+    image: default-docker-3rdparty.bahnhub.tech.rz.db.de/nats:latest
+    ports:
+      - 4222:4222
 
 volumes:
   postgres_data_disruptions:
