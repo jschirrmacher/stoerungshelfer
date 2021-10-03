@@ -61,6 +61,5 @@ export default defineComponent({
       font-size: 80%;
     }
   }
-
 }
 </style>
