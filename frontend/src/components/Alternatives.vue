@@ -28,7 +28,11 @@ export default defineComponent({
 <template>
   <ul class="alternatives">
     <li v-for="alternative in alternatives" :key="alternative.id" :class="{active: alternative.id === activeId}" @click="$emit('selected', alternative)">
-      <div><img :src="getIcon(alternative)">{{ alternative.description }}</div>
+      <div>
+        <img :src="getIcon(alternative)">
+        {{ alternative.description }}
+        <span>({{ alternative.distance }}min)</span>
+      </div>
     </li>
   </ul>
 </template>
@@ -51,6 +55,10 @@ export default defineComponent({
       margin: 0 .3rem;
       position: relative;
       top: -2px;
+    }
+
+    span {
+      font-size: 80%;
     }
   }
 

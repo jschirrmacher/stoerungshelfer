@@ -14,6 +14,31 @@ export default defineComponent({
     const zoom = ref(15)
     const rotation = ref(0)
     const activeAlternative = ref(null) as Ref<Alternative | null>
+    const disruption = { location: [9.9940519, 53.5522684] }
+    const alternatives = [
+        { id: "1",
+          description: "Mit dem StadtRAD ab Ballindamm",
+          distance: 1,
+          location: [9.995239, 53.552372],
+          provider: "callABike",
+          route: [disruption.location, [9.994254, 53.55227], [9.99455, 53.552122], [9.995239, 53.552372]]
+        },
+        {
+          id: "2",
+          description: "Mit einem Lime eTretroller ab Jungfernsteg",
+          distance: 2,
+          location: [9.992468, 53.553239],
+          provider: "lime",
+          route: [disruption.location, [9.992468, 53.553239]]
+        },
+        { id: "3",
+          description: "Mit dem Taxi ab Gänsemarkt",
+          distance: 8,
+          location: [9.988247, 53.555491],
+          provider: "taxi",
+          route: [disruption.location, [9.990721, 53.554444], [9.989145, 53.555248], [9.988247, 53.555491]]
+        },
+      ]
 
     return {
       store,
@@ -22,6 +47,8 @@ export default defineComponent({
       zoom,
       rotation,
       activeAlternative,
+      disruption,
+      alternatives,
       layers: [
         "geofox_workspace:dynamic_stations",
         "geofox_workspace:geofoxdb_stations",
@@ -50,16 +77,6 @@ export default defineComponent({
 
   components: { Disruption, Alternatives, Provider },
 
-  computed: {
-    alternatives() {
-      return [
-        { id: "1", description: "Mit dem StadtRAD ab Ballindamm", location: [9.995239, 53.552372], provider: "callABike" },
-        { id: "2", description: "Mit einem Lime eTretroller ab Jungfernsteg", location: [9.992468, 53.553239], provider: "lime" },
-        { id: "3", description: "Mit dem Taxi ab Gänsemarkt", location: [9.988247, 53.555491], provider: "taxi" },
-      ]
-    }
-  },
-
   methods: {
     selectAlternative(alternative: Alternative) {
       this.activeAlternative = alternative
@@ -81,7 +98,9 @@ export default defineComponent({
       </ol-image-layer>
 
       <ol-vector-layer :zIndex="1002">
-        <Disruption :coordinate="[9.9940519, 53.5522684]" />
+        <Disruption :coordinate="disruption.location" />
+      </ol-vector-layer>
+      <ol-vector-layer :zIndex="1003" v-if="activeAlternative">
         <Provider v-if="activeAlternative" :alternative="activeAlternative" />
       </ol-vector-layer>
     </ol-map>
