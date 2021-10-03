@@ -12,6 +12,10 @@
   "keywords": [],
   "author": "",
   "license": "Apache2",
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  },
   "devDependencies": {
     "@types/node": "16.10.2",
     "@vitejs/plugin-vue": "1.9.2",
