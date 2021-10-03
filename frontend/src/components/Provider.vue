@@ -22,7 +22,7 @@ export default defineComponent({
     <ol-feature>
       <ol-geom-point :coordinates="alternative.location"></ol-geom-point>
       <ol-style>
-        <ol-style-icon :src="marker" :scale="0.1"></ol-style-icon>
+        <ol-style-icon :src="marker" :scale="0.5" :anchor="[0.5, 1]"></ol-style-icon>
       </ol-style>
     </ol-feature>
   </ol-source-vector>
